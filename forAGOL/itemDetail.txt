@@ -1,0 +1,5 @@
+Name: Storytelling - Swipe
+
+Short Description: A storytelling template that enables users to view and compare two layers of a web map.
+
+This storytelling template displays a web map in a viewer with a "swipe" functionality that enables users to compare two "stacked" maps in the form of a web map with two thematic layers. Users can move the swipe bar to reveal the second map underneath.
