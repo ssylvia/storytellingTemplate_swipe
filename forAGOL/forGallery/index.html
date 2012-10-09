@@ -4,18 +4,21 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
-    <title>Storytelling Swipe</title>
-    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.0/js/dojo/dijit/themes/tundra/tundra.css">
-    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.0/js/esri/dijit/css/Popup.css">  
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/dojo/dijit/themes/tundra/tundra.css">
+    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/esri/css/esri.css" />  
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 
      <script type="text/javascript">
-      var djConfig = {
-        parseOnLoad: true
-      };
+      var dojoConfig = {
+        parseOnLoad: true,
+    	packages:[
+		  {name:"esriTemplate",location:location.pathname.replace(/\/[^/]+$/, '')}
+		]
+      }
     </script>
-    <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/?v=3.0compact"></script>
+    <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/?v=3.2compact"></script>
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="javascript/layout.js"></script>
     <script type="text/javascript">
@@ -88,11 +91,11 @@
 
           <!-- Map Section -->
           <div id="map" dojotype="dijit.layout.ContentPane" region="center">
-          	<div class="moveable" title="Move the slider left or right" id="sliderdiv">
+          	<div class="moveable" title="" id="sliderdiv">
             </div>
             <div id="legendCon">
 	         	<div id="legendDiv"></div>
-              	<div id="legendToggle"><p id="legTogText">MAP LEGEND ▼</p></div>
+              	<div id="legendToggle"><p id="legTogText"></p></div>
             </div>
             <img id="swipeImg" src="images/swipeStart.png" alt="">
           </div>
@@ -108,14 +111,13 @@
         
         <!--Loading Panel-->
         <div id="loadingCon">
-    		<div id="loadingDialog">
-     			<div id="loadingHeader"></div>
-     			 <div id="loading">Loading map from ArcGIS Online<br />
-       			 <img id="loadingImg" alt="" src="images/progressBar.gif">
-    		    </div>
-   		    </div>
- 		  </div	
+            <div id="loadingDialog">
+             	<div id="loadingHeader"></div>
+         		<div id="loading"></div>
+        		<img id="loadingImg" alt="" src="images/progressBar.gif">
+       		</div>
+        </div>
         
-      ></body>
+    </body>
 
   </html>
