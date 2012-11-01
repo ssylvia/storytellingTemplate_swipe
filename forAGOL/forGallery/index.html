@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/dojo/dijit/themes/tundra/tundra.css">
-    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/esri/css/esri.css" />  
+    <link rel="stylesheet" type="text/css" href="//servicesbeta.esri.com/jsapi/arcgis/3.3/js/dojo/dijit/themes/tundra/tundra.css">
+    <link rel="stylesheet" type="text/css" href="//servicesbeta.esri.com/jsapi/arcgis/3.3/js/esri/css/esri.css" />
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <link rel="stylesheet" type="text/css" href="css/popup.css">
 
@@ -18,20 +18,20 @@
 		]
       }
     </script>
-    <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/?v=3.2compact"></script>
+    <script type="text/javascript" src="//servicesbeta.esri.com/jsapi/arcgis/?v=3.3compact"></script>
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="javascript/layout.js"></script>
     <script type="text/javascript">
-      
+
     var configOptions;
-    
+
     function init(){
-    
+
       configOptions = {
         //The ID for the map from ArcGIS.com
         webmap : "62702544d70648e593bc05d65180fd64",
 		//The id for the web mapping applciation item that contains configuration info - in most
-        //cases this will be null. 
+        //cases this will be null.
         appid:"",
         //Enter a title, if no title is specified, the webmap's title is used.
         title : "",
@@ -45,7 +45,7 @@
         bingmapskey : "Akt3ZoeZ089qyG3zWQZSWpwV3r864AHStal7Aon21-Fyxwq_KdydAH32LTwhieA8",
         //specify a proxy url if needed
         proxyurl:"",
-        //specify the url to a geometry service 
+        //specify the url to a geometry service
         geometryserviceurl:"http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer",
         //Modify this to point to your sharing service URL if you are using the portal
         sharingurl :""
@@ -53,10 +53,10 @@
         initMap();
     }
 
-    //show map on load 
+    //show map on load
     dojo.addOnLoad(init);
     </script>
-    
+
     <style type="text/css">
 	  .esriSimpleSlider{
 	    background-color:#dadada;
@@ -71,8 +71,8 @@
 		  }
 	  });
 	</script>
-  </head>	
-   
+  </head>
+
       <body class="tundra">
         <div id="mainWindow" dojotype="dijit.layout.BorderContainer" design="headline"
         gutters="false" style="width:100%; height:100%;">
@@ -86,7 +86,7 @@
             <div id="logoArea">
             </div>
         <div id="header_flourish"></div>
-    
+
           </div>
 
           <!-- Map Section -->
@@ -103,12 +103,12 @@
           <!-- Footer Section-->
           <div id="footer" dojotype="dijit.layout.ContentPane" region="bottom">
               <span>
-                <select disabled="false" id='layerlistdd' onchange="updateSwipeLayer(this)"></select>		
+                <select disabled="false" id='layerlistdd' onchange="updateSwipeLayer(this)"></select>
               </span>
           </div>
 
         </div>
-        
+
         <!--Loading Panel-->
         <div id="loadingCon">
             <div id="loadingDialog">
@@ -117,7 +117,7 @@
         		<img id="loadingImg" alt="" src="images/progressBar.gif">
        		</div>
         </div>
-        
+
     </body>
 
   </html>

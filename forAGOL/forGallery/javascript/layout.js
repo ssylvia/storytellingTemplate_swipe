@@ -360,7 +360,7 @@ function createMap(){
         alert(i18n.viewer.errors.notDefined);
         return;
       }
-      swipeslider = new dojo.dnd.move.parentConstrainedMoveable("sliderdiv", {
+      swipeslider = new dnd.move.parentConstrainedMoveable("sliderdiv", {
         area: "content",
         within: true
       });
