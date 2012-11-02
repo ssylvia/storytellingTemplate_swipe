@@ -62,17 +62,26 @@
       overflow: hidden;
 	  }
 
-	  #social{
-	  margin-bottom:20px;
-	  }
+      #social,#logo{
+      float:right;
+      }
 
-	  #msLink{
-	  color:#fff;
-	  font-family:Arial, Helvetica, sans-serif;
-	  font-weight:bold;
-	  font-size:13px;
-	  outline:none;
-	  }
+      #social{
+      padding-bottom:20px;
+      }
+
+      #smLink{
+      color:#fff;
+      font-family:Arial, Helvetica, sans-serif;
+      font-weight:bold;
+      font-size:0.82em;
+      text-decoration:none;
+      outline:none;
+      }
+
+      #smLink:hover{
+      text-decoration:underline;
+      }
 
 	  #logo{
 	  border:none;
