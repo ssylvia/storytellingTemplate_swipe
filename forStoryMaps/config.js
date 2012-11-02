@@ -1,6 +1,6 @@
 {
   "configurationSettings":[{
-    "category": "<b>Application Settings</b>",  //title for a section of the configuration panel.
+    "category": "<b>Application Settings</b>",
     "fields": [{
       "type": "string",
       "fieldName": "title",
