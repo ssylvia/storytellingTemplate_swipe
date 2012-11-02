@@ -21,3 +21,4 @@
 {"ts":1351872437607,"patch":[[{"diffs":[[0,"</div>\r\n        "],[-1,"    "],[0,"</div>\r\n        "]],"start1":4675,"start2":4675,"length1":36,"length2":32}]],"length":5816,"saved":false}
 {"ts":1351872440037,"patch":[[{"diffs":[[0,"</div>\r\n        "],[1,"  "],[0,"</div>\r\n        "]],"start1":4675,"start2":4675,"length1":32,"length2":34}]],"length":5818,"saved":false}
 {"ts":1351872440281,"patch":[[{"diffs":[[0,"cript>\r\n"],[-1,"    "],[0,"\r\n    <!"]],"start1":2909,"start2":2909,"length1":20,"length2":16},{"diffs":[[0,"End-->\r\n"],[-1,"    "],[0,"\r\n  </he"]],"start1":3817,"start2":3817,"length1":20,"length2":16}]],"length":5810,"saved":false}
+{"ts":1351872940694,"patch":[[{"diffs":[[0,"ngurl :\""],[1,"http://arcgis.com/sharing/content/items"],[0,"\"\r\n     "]],"start1":2467,"start2":2467,"length1":16,"length2":55}]],"length":5849,"saved":false}
