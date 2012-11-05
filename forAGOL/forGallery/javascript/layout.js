@@ -133,16 +133,16 @@ function createMap(){
          if(map.loaded){
            initUI(layers);
 		   populateLayerList();
-		   if(configOptions.showLegend == false){
-			   $("#legendToggle").hide();
+		   if(configOptions.legend === "false" || configOptions.legend === false){
+			   $("#legendCon").hide();
 		   }
          }
          else{
            dojo.connect(map,"onLoad",function(){
              initUI(layers);
 			 populateLayerList();
-			 if(configOptions.showLegend == false){
-			   $("#legendToggle").hide();
+			 if(configOptions.legend === "false" || configOptions.legend === false){
+			   $("#legendCon").hide();
 		   	 }
            });
          }
