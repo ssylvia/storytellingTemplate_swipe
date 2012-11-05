@@ -47,12 +47,15 @@
        }
        if(urlObject.query.subtitle){
          configOptions.subtitle = urlObject.query.subtitle;
-       }       
+       }
        if(urlObject.query.swipe){
          configOptions.chooseSwipeLevel = urlObject.query.swipe;
        }
        if(urlObject.query.webmap){
          configOptions.webmap = urlObject.query.webmap;
+       }
+       if(urlObject.query.legend){
+         configOptions.showLegend = urlObject.query.legend;
        }
        if(urlObject.query.bingMapsKey){
          configOptions.bingmapskey = urlObject.query.bingMapsKey;

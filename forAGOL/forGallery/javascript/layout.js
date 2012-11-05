@@ -48,11 +48,14 @@
        if(urlObject.query.subtitle){
          configOptions.subtitle = urlObject.query.subtitle;
        }
+       if(urlObject.query.swipe){
+         configOptions.chooseSwipeLevel = urlObject.query.swipe;
+       }
        if(urlObject.query.webmap){
          configOptions.webmap = urlObject.query.webmap;
-       }       
-       if(urlObject.query.webmap){
-         configOptions.webmap = urlObject.query.webmap;
+       }
+       if(urlObject.query.legend){
+         configOptions.showLegend = urlObject.query.legend;
        }
        if(urlObject.query.bingMapsKey){
          configOptions.bingmapskey = urlObject.query.bingMapsKey;
@@ -72,6 +75,7 @@
 			   if(response.values.subtitle !== undefined){configOptions.subtitle = response.values.subtitle;}
 			   if(response.values.legend !== undefined){configOptions.showLegend = response.values.legend;}
 			   if(response.values.swipe !== undefined){configOptions.chooseSwipeLevel = response.values.swipe;}
+    		   if(response.values.webmap !== undefined){configOptions.webmap = response.values.webmap;}
 
 			   createMap();
 		  },
