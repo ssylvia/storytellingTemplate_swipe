@@ -113,7 +113,7 @@
          if(map.loaded){
            initUI(layers);
 		   populateLayerList();
-		   if(configOptions.legend === "false" || configOptions.legend === false){
+		   if(configOptions.showLegend === "false" || configOptions.showLegend === false){
 			   $("#legendCon").hide();
 		   }
          }
@@ -121,7 +121,7 @@
            dojo.connect(map,"onLoad",function(){
              initUI(layers);
 			 populateLayerList();
-			 if(configOptions.legend === "false" || configOptions.legend === false){
+			 if(configOptions.showLegend === "false" || configOptions.showLegend === false){
 			   $("#legendCon").hide();
 		   	 }
            });
