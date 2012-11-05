@@ -46,8 +46,11 @@
          configOptions.title = urlObject.query.title;
        }
        if(urlObject.query.subtitle){
-         configOptions.title = urlObject.query.subtitle;
+         configOptions.subtitle = urlObject.query.subtitle;
        }
+       if(urlObject.query.webmap){
+         configOptions.webmap = urlObject.query.webmap;
+       }       
        if(urlObject.query.webmap){
          configOptions.webmap = urlObject.query.webmap;
        }
