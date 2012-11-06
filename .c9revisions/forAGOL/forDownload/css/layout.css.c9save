@@ -12,3 +12,4 @@
 {"ts":1351807989248,"patch":[[{"diffs":[[0," solid #"],[1,"848484"],[0,"\r\n  \t  z"]],"start1":2228,"start2":2228,"length1":16,"length2":22}]],"length":3349,"saved":false}
 {"ts":1351807989673,"patch":[[{"diffs":[[0," #848484"],[1,";"],[0,"\r\n  \t  z"]],"start1":2234,"start2":2234,"length1":16,"length2":17}]],"length":3350,"saved":false}
 {"ts":1351808004161,"patch":[[{"diffs":[[0," border:"],[-1,"1"],[1,"2"],[0,"px solid"]],"start1":2217,"start2":2217,"length1":17,"length2":17}]],"length":3350,"saved":false}
+{"contributors":[],"silentsave":true,"ts":1352231002686,"patch":[[{"diffs":[[0,"g-bottom:10px;\r\n\t  }"],[1,"\r\n\r\n      .esriRtl #headerText{\r\n      float:right;\r\n      padding-right:25px;\r\n      }\r\n\r\n      .esriRtl #title{\r\n      text-align:right;\r\n      }\r\n\r\n      .esriRtl #logoArea{\r\n      float:left;\r\n      padding-right:25px;\r\n      }"]],"start1":3330,"start2":3330,"length1":20,"length2":251}]],"length":3581,"saved":false}

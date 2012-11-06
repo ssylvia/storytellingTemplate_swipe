@@ -16,6 +16,25 @@
 
 	 function initMap() {
        patchID();
+       
+       dojo.some(["ar","he"], function(l){
+         if(dojo.locale.indexOf(l) !== -1){
+           configOptions.isRightToLeft = true;
+           return true;
+         }
+       });
+       var dirNode = document.getElementsByTagName("html")[0];
+       if(configOptions.isRightToLeft){
+         dirNode.setAttribute("dir","rtl");
+         dojo.addClass( dirNode,"esriRtl");
+         //Page Specific
+         dojo.attr(dojo.byId("legendCon"),"dir","rtl");
+       }else{
+         dirNode.setAttribute("dir","ltr");
+         dojo.addClass(dirNode,"esriLtr");
+         //Page Specific
+         dojo.attr(dojo.byId("legendCon"),"dir","ltr");
+       }
 
        i18n = dojo.i18n.getLocalization("esriTemplate","template");
        dojo.byId('loading').innerHTML = i18n.viewer.loading.message;
