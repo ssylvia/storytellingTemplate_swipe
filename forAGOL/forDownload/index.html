@@ -12,16 +12,18 @@
 
      <script type="text/javascript">
       var dojoConfig = {
-        parseOnLoad: true,
-		packages:[
-		  {name:"esriTemplate",location:location.pathname.replace(/\/[^/]+$/, '')}
-		]
-      };
+    	  parseOnLoad: true,
+		  packages:[
+			{name:"esriTemplate",location:location.pathname.replace(/\/[^/]+$/, '')},
+            {name:"utilities",location:location.pathname.replace(/\/[^/]+$/, '') + '/javascript'}
+		  ]
+		};;
     </script>
     <script type="text/javascript" src="http://servicesbeta.esri.com/jsapi/arcgis/?v=3.3"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="javascript/layout.js"></script>
     <script type="text/javascript">
+
+    dojo.require("utilities.layout");
 
     var configOptions;
 
@@ -30,6 +32,9 @@
       configOptions = {
         //The ID for the map from ArcGIS.com
         webmap : "62702544d70648e593bc05d65180fd64",
+        //The id for the web mapping applciation item that contains configuration info - in most
+        //cases this will be null.
+        appid:"",
         //Enter a title, if no title is specified, the webmap's title is used.
         title : "",
         //Enter a subtitle, if not specified the ArcGIS.com web map's summary is used
@@ -47,7 +52,7 @@
         //Modify this to point to your sharing service URL if you are using the portal
         sharingurl :"http://arcgis.com/sharing/content/items"
       };
-        initMap();
+        utilities.layout.initMap();
     }
 
     //show map on load

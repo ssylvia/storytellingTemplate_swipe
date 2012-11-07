@@ -23,3 +23,8 @@
 {"ts":1351872440281,"patch":[[{"diffs":[[0,"cript>\r\n"],[-1,"    "],[0,"\r\n    <!"]],"start1":2909,"start2":2909,"length1":20,"length2":16},{"diffs":[[0,"End-->\r\n"],[-1,"    "],[0,"\r\n  </he"]],"start1":3817,"start2":3817,"length1":20,"length2":16}]],"length":5810,"saved":false}
 {"ts":1351872940694,"patch":[[{"diffs":[[0,"ngurl :\""],[1,"http://arcgis.com/sharing/content/items"],[0,"\"\r\n     "]],"start1":2467,"start2":2467,"length1":16,"length2":55}]],"length":5849,"saved":false}
 {"contributors":[],"silentsave":true,"ts":1352308590188,"patch":[[{"diffs":[[0,"=3.3"],[-1,"compact"],[0,"\"></"]],"start1":983,"start2":983,"length1":15,"length2":8}]],"length":5842,"saved":false}
+{"ts":1352308843607,"patch":[[{"diffs":[[0,"$/, '')}"],[1,",\r\n          {name:\"utilities\",location:location.pathname.replace(/\\/[^/]+$/, '') + '/javascript'}"],[0,"\r\n\t\t]\r\n "]],"start1":865,"start2":865,"length1":16,"length2":114}]],"length":5940,"saved":false}
+{"ts":1352308879027,"patch":[[{"diffs":[[0,"cript\">\r"],[1,"\n    \r\n    dojo.require(\"utilities.layout\");\r"],[0,"\n\r\n    v"]],"start1":1304,"start2":1304,"length1":16,"length2":61}]],"length":5985,"saved":false}
+{"ts":1352308883066,"patch":[[{"diffs":[[0,"t>\r\n"],[-1,"    <script type=\"text/javascript\" src=\"javascript/layout.js\"></script>\r\n"],[0,"    "]],"start1":1199,"start2":1199,"length1":81,"length2":8}]],"length":5912,"saved":false}
+{"ts":1352308976411,"patch":[[{"diffs":[[0,"        "],[1,"utilities.layout."],[0,"initMap("]],"start1":2590,"start2":2590,"length1":16,"length2":33}]],"length":5929,"saved":false}
+{"ts":1352308976968,"patch":[[{"diffs":[[0,"ript\">\r\n"],[-1,"    "],[0,"\r\n    do"]],"start1":1232,"start2":1232,"length1":20,"length2":16}]],"length":5925,"saved":false}

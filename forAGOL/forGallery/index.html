@@ -14,14 +14,16 @@
       var dojoConfig = {
         parseOnLoad: true,
     	packages:[
-		  {name:"esriTemplate",location:location.pathname.replace(/\/[^/]+$/, '')}
+		  {name:"esriTemplate",location:location.pathname.replace(/\/[^/]+$/, '')},
+          {name:"utilities",location:location.pathname.replace(/\/[^/]+$/, '') + '/javascript'}
 		]
       }
     </script>
     <script type="text/javascript" src="//servicesbeta.esri.com/jsapi/arcgis/?v=3.3"></script>
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="javascript/layout.js"></script>
     <script type="text/javascript">
+
+    dojo.require("utilities.layout");
 
     var configOptions;
 
@@ -48,9 +50,9 @@
         //specify the url to a geometry service
         geometryserviceurl:"http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer",
         //Modify this to point to your sharing service URL if you are using the portal
-        sharingurl :""
+        sharingurl :"http://arcgis.com/sharing/content/items"
       };
-        initMap();
+        utilities.layout.initMap();
     }
 
     //show map on load

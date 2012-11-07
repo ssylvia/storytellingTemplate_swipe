@@ -1,22 +1,32 @@
+  dojo.provide("utilities.layout");
+
   dojo.require("esri.map");
-  dojo.require("esri.dijit.Legend");
-  dojo.require("esri.dijit.Scalebar");
+  dojo.require("esri.layout");
+  dojo.require("esri.widgets");
   dojo.require("esri.arcgis.utils");
-  dojo.require("esri.IdentityManager");
-  dojo.require("dijit.dijit");
-  dojo.require("dijit.layout.BorderContainer");
-  dojo.require("dijit.layout.ContentPane");
-  dojo.require("dijit.layout.StackContainer");
-  dojo.require("esri.dijit.Popup");
-  dojo.require("dojo.dnd.move");
+  dojo.requireLocalization("esriTemplate","template");
 
+  utilities.layout = {};
+  dojo.mixin(utilities.layout,{
 
-     var map, urlObject, chooseLayer, swipeslider, swipediv, clipval, offset_left, offset_top, swipelayerid="", swipeconnect=null, mapPoint, layers, setFeatures = true;
-     var mapLoaded = false;
+      map:null,
+      urlObject:null,
+      chooseLayer:null,
+      swipeslider:null,
+      swipediv:null,
+      clipval:null,
+      offset_left:null,
+      offset_top:null,
+      swipelayerid:"",
+      swipeconnect:null,
+      mapPoint:null,
+      layers:null,
+      setFeatures:true,
+      mapLoaded:false,
 
-	 function initMap() {
-       patchID();
-       
+      initMap:function() {
+       this.patchID();
+
        dojo.some(["ar","he"], function(l){
          if(dojo.locale.indexOf(l) !== -1){
            configOptions.isRightToLeft = true;
@@ -80,9 +90,9 @@
          configOptions.bingmapskey = urlObject.query.bingMapsKey;
        }
 
-	   esri.arcgis.utils.arcgisUrl = configOptions.sharingurl;
+       esri.arcgis.utils.arcgisUrl = configOptions.sharingurl;
 
-	   //is an appid specified - if so read json from there
+       //is an appid specified - if so read json from there
 	  if(configOptions.appid || (urlObject.query && urlObject.query.appid)){
 		var appid = configOptions.appid || urlObject.query.appid;
 		var requestHandle = esri.request({
@@ -96,7 +106,7 @@
 			   if(response.values.swipe !== undefined){configOptions.chooseSwipeLevel = response.values.swipe;}
     		   if(response.values.webmap !== undefined){configOptions.webmap = response.values.webmap;}
 
-			   createMap();
+			   utilities.layout.createMap();
 		  },
 		  error: function(response){
 			var e = response.message;
@@ -104,12 +114,12 @@
 		  }
 		});
 		 }else{
-			createMap();
+			utilities.layout.createMap();
 		 }
-	 }
+	 },
 
-function createMap(){
-	  var popup = new esri.dijit.Popup({
+     createMap:function(){
+      var popup = new esri.dijit.Popup({
 		highlight:true
       }, dojo.create("div"));
 
@@ -133,41 +143,41 @@ function createMap(){
 
          map = response.map;
 
-		 dojo.connect(map,"onUpdateEnd",hideLoader);
+		 dojo.connect(map,"onUpdateEnd",utilities.layout.hideLoader);
 		 dojo.connect(map,"onClick",function(event){
-			 mapPoint = event.mapPoint;
+			 utilities.layout.mapPoint = event.mapPoint;
 		 });
 		 dojo.connect(popup,"onSetFeatures",function(){
-			 if (setFeatures == true){
+			 if (utilities.layout.setFeatures == true){
 				 var selectedFeatures = [];
 				 dojo.forEach(popup.features,function(lyr,i){
 					 if(lyr.geometry.type == 'polygon'){
-						 if (lyr.geometry.contains(mapPoint) == true){
+						 if (lyr.geometry.contains(utilities.layout.mapPoint) == true){
 							 selectedFeatures.push(lyr);
 						 }
 					 }
 				 });
-				 setFeatures = false;
+				 utilities.layout.setFeatures = false;
 				 popup.setFeatures(selectedFeatures);
 			 }
 			 else{
-				 setFeatures = true;
+				 utilities.layout.setFeatures = true;
 			 }
 		 });
 
-         layers = response.itemInfo.itemData.operationalLayers;
+         utilities.layout.layers = response.itemInfo.itemData.operationalLayers;
 
          if(map.loaded){
-           initUI(layers);
-		   populateLayerList();
+           utilities.layout.initUI(utilities.layout.layers);
+		   utilities.layout.populateLayerList();
 		   if(configOptions.showLegend === "false" || configOptions.showLegend === false){
 			   $("#legendCon").hide();
 		   }
          }
          else{
            dojo.connect(map,"onLoad",function(){
-             initUI(layers);
-			 populateLayerList();
+             utilities.layout.initUI(utilities.layout.layers);
+			 utilities.layout.populateLayerList();
 			 if(configOptions.showLegend === "false" || configOptions.showLegend === false){
 			   $("#legendCon").hide();
 		   	 }
@@ -181,10 +191,9 @@ function createMap(){
          alert("Unable to create map: " + " " + dojo.toJson(error.message));
        });
 
-     }
+     },
 
-
-     function initUI(layers) {
+     initUI: function(layers) {
        //add chrome theme for popup
        dojo.addClass(map.infoWindow.domNode, "chrome");
        //add the scalebar
@@ -193,7 +202,7 @@ function createMap(){
          scalebarUnit:i18n.viewer.main.scaleBarUnits //metric or english
        });
 
-       var layerInfo = buildLayersList(layers);
+       var layerInfo = utilities.layout.buildLayersList(layers);
 
        if(layerInfo.length > 0){
          var legendDijit = new esri.dijit.Legend({
@@ -205,10 +214,10 @@ function createMap(){
        else{
          $("#legendToggle").hide();
        }
-     }
+     },
 
-//build a list of layers to dispaly in the legend
-  function buildLayersList(layers){
+     //build a list of layers to dispaly in the legend
+  buildLayersList:function(layers){
 
  //layers  arg is  response.itemInfo.itemData.operationalLayers;
   var layerInfos = [];
@@ -255,9 +264,9 @@ function createMap(){
     }
   });
   return layerInfos;
-  }
+  },
 
-     function patchID() {  //patch id manager for use in apps.arcgis.com
+  patchID:function() {  //patch id manager for use in apps.arcgis.com
        esri.id._isIdProvider = function(server, resource) {
        // server and resource are assumed one of portal domains
 
@@ -299,33 +308,20 @@ function createMap(){
 
        return retVal;
      };
-    }
+    },
 
-	function hideLoader(){
-	  if (mapLoaded == false){
-		mapLoaded = true;
+    hideLoader:function(){
+      if (utilities.layout.mapLoaded == false){
+		utilities.layout.mapLoaded = true;
 		$("#loadingCon").hide();
 		$("#swipeImg").css('left',((map.width/2)-80));
 		$("#swipeImg").css('top',((map.height/2)-50));
 		$("#swipeImg").show();
 	  }
-	}
+	},
 
-	//Jquery Layout
-	$(document).ready(function(e) {
-	  $("#legendToggle").click(function(){
-		if ($("#legendDiv").css('display')=='none'){
-		  $("#legTogText").html(i18n.viewer.legToggle.up);
-		}
-		else{
-		  $("#legTogText").html(i18n.viewer.legToggle.down);
-		}
-		$("#legendDiv").slideToggle();
-	  });
-    });
-
-	//Swipe Control
-	function populateLayerList(){
+    //Swipe Control
+    populateLayerList: function(){
 	  var select = dojo.byId("layerlistdd");
 	  if (map.graphics.graphics.length > 0) {
 		select.options[select.options.length] = new Option("Graphics Layer", map.graphics.id,"selected");
@@ -336,108 +332,106 @@ function createMap(){
 		select.options[select.options.length] = new Option(id, id);
 	  });
 	  select.disabled= false;
-	  startswipe();
-	}
+	  utilities.layout.startswipe();
+	},
 
-	function initswipe() {
-      chooseLayer = configOptions.chooseSwipeLevel;
-	  swipelayerid = dojo.byId("layerlistdd")[chooseLayer].value;
-      clipval = map.width;
-      swipediv = null;
-      if (swipelayerid == map.graphics.id) {
+    initswipe:function() {
+      utilities.layout.chooseLayer = configOptions.chooseSwipeLevel;
+      utilities.layout.swipelayerid = dojo.byId("layerlistdd")[utilities.layout.chooseLayer].value;
+      utilities.layout.swipediv = null;
+      if (utilities.layout.swipelayerid == map.graphics.id) {
         //console.log("Graphics layer");
         //map.graphics._div.parent.rawNode.id
-        swipediv = dojo.byId(map.container.id + "_gc");
+        utilities.layout.swipediv = dojo.byId(map.container.id + "_gc");
       }
       else {
-        var layer = map.getLayer(swipelayerid);
+        var layer = map.getLayer(utilities.layout.swipelayerid);
         //console.log(layer);
         if (layer == null || layer == undefined) {
           alert(i18n.viewer.errors.notDefined);
           return;
         }
-        swipediv = layer._div;
+        utilities.layout.swipediv = layer._div;
 	  }
-      if (swipediv === undefined) {
+      if (utilities.layout.swipediv === undefined) {
         alert(i18n.viewer.errors.undfnd);
         return;
       }
-	  if (swipediv.style === undefined) {
+	  if (utilities.layout.swipediv.style === undefined) {
 		alert(i18n.viewer.errors.noStyle);
 		return;
 	  }
       //console.log("Swipe ready to use on layer: " + swipelayerid);
-    }
+    },
 
-    function startswipe(){
+    startswipe:function(){
       //map.hideZoomSlider();
       //console.log("Swipe tool initializing ...");
 
-      initswipe();
+      utilities.layout.initswipe();
 
-      if (swipeslider != undefined || swipeslider != null) {
+      if (utilities.layout.swipeslider != undefined || utilities.layout.swipeslider != null) {
         //console.log("swipe slider is visible? should not happen");
         //console.log(swipeslider);
-	  }
+      }
 
 	  //swipelayerid = dojo.byId("layerlistdd").value;
 	  //dojo.byId("layerlistdd").disabled = true;
 
-	  if (swipelayerid === undefined || swipelayerid == "") {
+	  if (utilities.layout.swipelayerid === undefined || utilities.layout.swipelayerid == "") {
         alert(i18n.viewer.errors.notDefined);
         return;
       }
-      swipeslider = new dnd.move.parentConstrainedMoveable("sliderdiv", {
+      utilities.layout.swipeslider = new dnd.move.parentConstrainedMoveable("sliderdiv", {
         area: "content",
         within: true
       });
 
-      swipeslider.node.style.height = map.height + "px";
-      swipeslider.node.style.top = "0px";
-      swipeslider.node.style.left = ((map.width/2)-4) + "px";
+      utilities.layout.swipeslider.node.style.height = map.height + "px";
+      utilities.layout.swipeslider.node.style.top = "0px";
+      utilities.layout.swipeslider.node.style.left = ((map.width/2)-4) + "px";
 	  if (iPad == true){
-		swipeslider.node.style.left = ((map.width/2)-7) + "px";
+		utilities.layout.swipeslider.node.style.left = ((map.width/2)-7) + "px";
 	  }
-      clipval = ((map.width/2)-4);
+      utilities.layout.clipval = ((map.width/2)-4);
 
       //Just a check, should not call this function here
-        if (swipediv != null)
-        clearClip();
+        if (utilities.layout.swipediv != null)
+        utilities.layout.clearClip();
 
         //console.log("Swipe layer: " + swipelayerid);
 
-        if (swipelayerid == null || swipelayerid == "") {
+        if (utilities.layout.swipelayerid == null || utilities.layout.swipelayerid == "") {
           alert(i18n.viewer.errors.notDefined);
           return;
         }
 
-        cliplayer(swipelayerid);
-      }
+        utilities.layout.cliplayer(utilities.layout.swipelayerid);
+      },
 
-      function cliplayer(layerid){
+      cliplayer:function(layerid){
         //Initial swipe slider location
-        swipe(dojo.byId("sliderdiv").style.left);
-
+        utilities.layout.swipe(dojo.byId("sliderdiv").style.left);
         //Make the slider visible
         dojo.byId("sliderdiv").style.display = "";
 
-        dojo.connect(swipeslider, "onMoveStart", function(args){
+        dojo.connect(utilities.layout.swipeslider, "onMoveStart", function(args){
         //console.log("move start");
         //this.node.style.opacity = "0.5";
         //dojo._setOpacity(this.node, 0.5);
-		$("#sliderdiv").fadeTo("fast","0.5");
+    	$("#sliderdiv").fadeTo("fast","0.5");
 		$("#swipeImg").fadeOut();
 
       });
-      swipeconnect = dojo.connect(swipeslider, 'onMove', function(args){
+      utilities.layout.swipeconnect = dojo.connect(utilities.layout.swipeslider, 'onMove', function(args){
         this.node.style.top = "0px"; //needed to avoid offset
         var left = parseInt(this.node.style.left);
         //console.log(left + ", " + (map.width));
         if (left <=0 || left >= (map.width)) return;
-          clipval = this.node.style.left;
-          swipe(clipval);
+          utilities.layout.clipval = this.node.style.left;
+          utilities.layout.swipe(utilities.layout.clipval);
         });
-        dojo.connect(swipeslider, "onMoveStop", function(args){
+        dojo.connect(utilities.layout.swipeslider, "onMoveStop", function(args){
           //console.log("move stop event");
           //this.node.style.opacity = "1.0";
           //dojo._setOpacity(this.node, 1.0);
@@ -445,54 +439,54 @@ function createMap(){
         });
         panEndConnect = dojo.connect(map, 'onPanEnd', function(args){
           //console.log("pan end event - refreshing swipe position");
-          swipe(clipval);
+          utilities.layout.swipe(utilities.layout.clipval);
         });
 
         if (map.navigationMode === "css-transforms") {
           panConnect = dojo.connect(map, 'onPan', function(args){
           //console.log("pan end event - refreshing swipe position");
-          swipe(clipval);
+          utilities.layout.swipe(utilities.layout.clipval);
         });
       }
-    }
+    },
 
-    function clearClip(){
+    clearClip:function(){
       //console.log("Clearing clip");
-      if (swipediv != null) {
-        swipediv.style.clip = dojo.isIE ? "rect(auto auto auto auto)" : "";
+      if (utilities.layout.swipediv != null) {
+        utilities.layout.swipediv.style.clip = dojo.isIE ? "rect(auto auto auto auto)" : "";
       }
-    }
+    },
 
-    function swipe(val){
-      if (swipediv != null) {
-        offset_left = parseFloat(swipediv.style.left);
-        offset_top = parseFloat(swipediv.style.top);
+    swipe:function(val){
+      if (utilities.layout.swipediv != null) {
+        utilities.layout.offset_left = parseFloat(utilities.layout.swipediv.style.left);
+        utilities.layout.offset_top = parseFloat(utilities.layout.swipediv.style.top);
 
         //console.log("Val: " + val);
 
         var rightval, leftval, topval, bottomval;
 
-        if (offset_left > 0) {
-          rightval = parseFloat(val) - Math.abs(offset_left);
-          leftval = -(offset_left);
+        if (utilities.layout.offset_left > 0) {
+          rightval = parseFloat(val) - Math.abs(utilities.layout.offset_left);
+          leftval = -(utilities.layout.offset_left);
         }
         else
-        if (offset_left < 0) {
+        if (utilities.layout.offset_left < 0) {
           leftval = 0;
-          rightval = parseFloat(val) + Math.abs(offset_left);
+          rightval = parseFloat(val) + Math.abs(utilities.layout.offset_left);
         }
         else {
           leftval = 0;
           rightval = parseFloat(val);
         }
-        if (offset_top > 0) {
-          topval = -(offset_top);
-          bottomval = map.height - offset_top;
-		}
+        if (utilities.layout.offset_top > 0) {
+          topval = -(utilities.layout.offset_top);
+          bottomval = map.height - utilities.layout.offset_top;
+    	}
         else
-        if (offset_top < 0) {
+        if (utilities.layout.offset_top < 0) {
           topval = 0;
-          bottomval = map.height + Math.abs(offset_top);
+          bottomval = map.height + Math.abs(utilities.layout.offset_top);
         }
         else {
           topval = 0;
@@ -518,7 +512,7 @@ function createMap(){
             prefix = "-o-";
           }
 
-          var transformValue = swipediv.style.getPropertyValue(prefix + "transform");
+          var transformValue = utilities.layout.swipediv.style.getPropertyValue(prefix + "transform");
 
           if(transformValue) {
 			if(transformValue.toLowerCase().indexOf("translate3d") !== -1) {
@@ -550,27 +544,42 @@ function createMap(){
         //var clipstring = "rect(0px " + val + "px " + map.height + "px " + " 0px)";
         var clipstring = "rect(" + topval + "px " + rightval + "px " + bottomval + "px " + leftval + "px)";
         //console.log("New Clip string(T,R,B,L): " + clipstring);
-        swipediv.style.clip = clipstring;
+        utilities.layout.swipediv.style.clip = clipstring;
       }
-	}
+	},
 
     //This is called when "Stop Swipe" button is clicked
-    function stopswipe(){
+    stopswipe:function(){
       map.showZoomSlider();
       //console.log("Swipe tool disabled!");
-      swipeslider = null;
+      utilities.layout.swipeslider = null;
       //dojo.byId("layerlistdd").disabled = false;
       dojo.byId("sliderdiv").style.display = "none";
-      if (swipeconnect)
-      dojo.disconnect(swipeconnect);
+      if (utilities.layout.swipeconnect)
+      dojo.disconnect(utilities.layout.swipeconnect);
       if (panEndConnect)
       dojo.disconnect(panEndConnect);
       if (panConnect)
       dojo.disconnect(panConnect);
       clearInterval(animtimer);
       clearInterval(flashtimer);
-      if (swipediv != null) {
-        swipediv.style.clip = dojo.isIE ? "rect(auto auto auto auto)" : "";
-        swipediv = null;
+      if (utilities.layout.swipediv != null) {
+        utilities.layout.swipediv.style.clip = dojo.isIE ? "rect(auto auto auto auto)" : "";
+        utilities.layout.swipediv = null;
       }
-	}
+    }
+
+  });
+
+	//Jquery Layout
+	$(document).ready(function(e) {
+	  $("#legendToggle").click(function(){
+		if ($("#legendDiv").css('display')=='none'){
+		  $("#legTogText").html(i18n.viewer.legToggle.up);
+		}
+		else{
+		  $("#legTogText").html(i18n.viewer.legToggle.down);
+		}
+		$("#legendDiv").slideToggle();
+	  });
+    });
