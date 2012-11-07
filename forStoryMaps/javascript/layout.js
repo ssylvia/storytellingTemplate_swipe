@@ -97,6 +97,7 @@ function createMap(){
 	   var mapDeferred = esri.arcgis.utils.createMap(configOptions.webmap, "map", {
          mapOptions: {
            slider: true,
+           sliderStyle:"small",
            nav: false,
            wrapAround180:true,
 		   infoWindow:popup

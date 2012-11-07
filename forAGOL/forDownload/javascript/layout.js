@@ -16,7 +16,7 @@
 
 	 function initMap() {
        patchID();
-       
+
        dojo.some(["ar","he"], function(l){
          if(dojo.locale.indexOf(l) !== -1){
            configOptions.isRightToLeft = true;
@@ -89,6 +89,7 @@
 	   var mapDeferred = esri.arcgis.utils.createMap(configOptions.webmap, "map", {
          mapOptions: {
            slider: true,
+           sliderStyle:"small",
            nav: false,
            wrapAround180:true,
 		   infoWindow:popup
