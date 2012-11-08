@@ -188,7 +188,7 @@
        });
 
        mapDeferred.addErrback(function (error) {
-         alert("Unable to create map: " + " " + dojo.toJson(error.message));
+         alert(i18n.viewer.errors.createMap + " " + dojo.toJson(error.message));
        });
 
      },
@@ -528,7 +528,7 @@
 			  tx = parseFloat(transformValue[0]);
 			  ty = parseFloat(transformValue[1]);
 			} catch(e) {
-			  alert("Error cannot continue");
+			  alert(i18n.viewer.errors.noContinue);
 			  console.error(e);
 			}
 
