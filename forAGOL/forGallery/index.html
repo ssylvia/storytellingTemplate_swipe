@@ -13,17 +13,15 @@
      <script type="text/javascript">
       var dojoConfig = {
         parseOnLoad: true,
-    	packages:[
-		  {name:"esriTemplate",location:location.pathname.replace(/\/[^/]+$/, '')},
-          {name:"utilities",location:location.pathname.replace(/\/[^/]+$/, '') + '/javascript'}
+        packages:[
+		  {name:"esriTemplate",location:location.pathname.replace(/\/[^/]+$/, '')}
 		]
-      }
+      };
     </script>
     <script type="text/javascript" src="//servicesbeta.esri.com/jsapi/arcgis/?v=3.3"></script>
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="javascript/layout.js"></script>
     <script type="text/javascript">
-
-    dojo.require("utilities.layout");
 
     var configOptions;
 
@@ -32,9 +30,6 @@
       configOptions = {
         //The ID for the map from ArcGIS.com
         webmap : "62702544d70648e593bc05d65180fd64",
-		//The id for the web mapping applciation item that contains configuration info - in most
-        //cases this will be null.
-        appid:"",
         //Enter a title, if no title is specified, the webmap's title is used.
         title : "",
         //Enter a subtitle, if not specified the ArcGIS.com web map's summary is used
@@ -52,7 +47,7 @@
         //Modify this to point to your sharing service URL if you are using the portal
         sharingurl :""
       };
-        utilities.layout.initMap();
+        initMap();
     }
 
     //show map on load
@@ -93,11 +88,11 @@
 
           <!-- Map Section -->
           <div id="map" dojotype="dijit.layout.ContentPane" region="center" dir="ltr">
-          	<div class="moveable" title="" id="sliderdiv">
+          	<div class="moveable" title="Move the slider left or right" id="sliderdiv">
             </div>
             <div id="legendCon" dir="ltr">
               	<div id="legendToggle"><p id="legTogText"></p></div>
-             	<div id="legendDiv"></div>
+                <div id="legendDiv"></div>
             </div>
             <img id="swipeImg" src="images/swipeStart.png" alt="">
           </div>
@@ -114,7 +109,7 @@
         <!--Loading Panel-->
         <div id="loadingCon">
             <div id="loadingDialog">
-             	<div id="loadingHeader"></div>
+         		<div id="loadingHeader"></div>
          		<div id="loading"></div>
         		<img id="loadingImg" alt="" src="images/progressBar.gif">
        		</div>
